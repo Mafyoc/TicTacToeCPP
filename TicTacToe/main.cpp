@@ -2,6 +2,7 @@
 #include<map>
 #include<random>
 #include<string>
+#include<stdlib.h>
 using namespace std;
 
 void printBoard(map<string, string> &boardMap);
@@ -10,6 +11,7 @@ void checkIfGameIsOver(map<string, string> boardMap, string whoIsCheck, bool &is
 
 int main()
 {
+	string replay;
 	string playerLetter;
 	string computerLetter;
 	bool isGameEnd = false;
@@ -54,6 +56,19 @@ int main()
 	{
 		currentMove(boardMap, isPlayersTurn, isGameEnd, playerLetter, computerLetter);
 	}
+	
+	while(replay != "Y" || replay != "N")
+		if (replay == "Y") {
+			system("CLS");
+			main();
+		}
+		else if (replay == "N") {
+
+		}
+		else {
+			cout << "Would you like to play again? Y/N" << endl;
+			cin >> replay;
+		}
 
 	return 0;
 }
@@ -78,6 +93,7 @@ void currentMove(map<string, string> &boardMap, bool &isPlayersTurn, bool &isGam
 		if (boardMap[tempCoordinate] == "_") //Checks if the entered coordinates are an empty space on the board.
 		{
 			boardMap[tempCoordinate] = playerLetter;
+			printBoard(boardMap);
 			checkIfGameIsOver(boardMap, playerLetter, isGameEnd);
 			isPlayersTurn = false;
 		}
@@ -95,6 +111,7 @@ void currentMove(map<string, string> &boardMap, bool &isPlayersTurn, bool &isGam
 		{
 			boardMap[coordinate] = computerLetter;
 			cout << "The computer has chosen " << coordinate << endl;
+			printBoard(boardMap);
 			checkIfGameIsOver(boardMap, computerLetter, isGameEnd);
 			isPlayersTurn = true;
 		}
@@ -103,54 +120,62 @@ void currentMove(map<string, string> &boardMap, bool &isPlayersTurn, bool &isGam
 			isPlayersTurn = false;
 		}
 	}
-	printBoard(boardMap);
 }
 
 void checkIfGameIsOver(map<string, string> boardMap, string whoIsCheck, bool &isGameEnd)
 {
-	if (boardMap["0,0"] == whoIsCheck && boardMap["1,0"] == whoIsCheck && boardMap["2,0"] == whoIsCheck) {
+	if (boardMap["0,0"] == whoIsCheck && boardMap["1,0"] == whoIsCheck && boardMap["2,0"] == whoIsCheck) 
+	{
 		cout << endl;
 		cout << whoIsCheck + " has won!" << endl;
 		isGameEnd = true;
 	}
-	else if (boardMap["0,1"] == whoIsCheck && boardMap["1,1"] == whoIsCheck && boardMap["2,1"] == whoIsCheck) {
+	else if (boardMap["0,1"] == whoIsCheck && boardMap["1,1"] == whoIsCheck && boardMap["2,1"] == whoIsCheck) 
+	{
 		cout << endl;
 		cout << whoIsCheck + " has won!" << endl;
 		isGameEnd = true;
 	}
-	else if (boardMap["0,2"] == whoIsCheck && boardMap["1,2"] == whoIsCheck && boardMap["2,2"] == whoIsCheck) {
+	else if (boardMap["0,2"] == whoIsCheck && boardMap["1,2"] == whoIsCheck && boardMap["2,2"] == whoIsCheck) 
+	{
 		cout << endl;
 		cout << whoIsCheck + " has won!" << endl;
 		isGameEnd = true;
 	}
-	else if (boardMap["0,0"] == whoIsCheck && boardMap["0,1"] == whoIsCheck && boardMap["0,2"] == whoIsCheck) {
+	else if (boardMap["0,0"] == whoIsCheck && boardMap["0,1"] == whoIsCheck && boardMap["0,2"] == whoIsCheck) 
+	{
 		cout << endl;
 		cout << whoIsCheck + " has won!" << endl;
 		isGameEnd = true;
 	}
-	else if (boardMap["1,0"] == whoIsCheck && boardMap["1,1"] == whoIsCheck && boardMap["1,2"] == whoIsCheck) {
+	else if (boardMap["1,0"] == whoIsCheck && boardMap["1,1"] == whoIsCheck && boardMap["1,2"] == whoIsCheck) 
+	{
 		cout << endl;
 		cout << whoIsCheck + " has won!" << endl;
 		isGameEnd = true;
 	}
-	else if (boardMap["2,0"] == whoIsCheck && boardMap["2,1"] == whoIsCheck && boardMap["2,2"] == whoIsCheck) {
+	else if (boardMap["2,0"] == whoIsCheck && boardMap["2,1"] == whoIsCheck && boardMap["2,2"] == whoIsCheck) 
+	{
 		cout << endl;
 		cout << whoIsCheck + " has won!" << endl;
 		isGameEnd = true;
 	}
-	else if (boardMap["0,0"] == whoIsCheck && boardMap["1,1"] == whoIsCheck && boardMap["2,2"] == whoIsCheck) {
+	else if (boardMap["0,0"] == whoIsCheck && boardMap["1,1"] == whoIsCheck && boardMap["2,2"] == whoIsCheck) 
+	{
 		cout << endl;
 		cout << whoIsCheck + " has won!" << endl;
 		isGameEnd = true;
 	}
-	else if (boardMap["0,2"] == whoIsCheck && boardMap["1,1"] == whoIsCheck && boardMap["0,0"] == whoIsCheck) {
+	else if (boardMap["0,2"] == whoIsCheck && boardMap["1,1"] == whoIsCheck && boardMap["0,0"] == whoIsCheck) 
+	{
 		cout << endl;
 		cout << whoIsCheck + " has won!" << endl;
 		isGameEnd = true;
 	}
 	else //checks for a draw
 	{
-		if (boardMap["0,0"] == "_") {
+		if (boardMap["0,0"] == "_") 
+		{
 			isGameEnd = false;
 		}
 		else if (boardMap["1,0"] == "_")
@@ -181,7 +206,8 @@ void checkIfGameIsOver(map<string, string> boardMap, string whoIsCheck, bool &is
 		{
 			isGameEnd = false;
 		}
-		else {
+		else 
+		{
 			isGameEnd = true;
 			cout << endl;
 			cout << "DRAW" << endl;
